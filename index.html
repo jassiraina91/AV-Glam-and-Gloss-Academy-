@@ -1,0 +1,49 @@
+  </div>
+
+  <div class="card" style="text-align:center">
+    <h3>📱 Scan for Offers</h3>
+    <div id="qrcode"></div>
+  </div>
+
+</div>
+
+<div class="footer">© AV Glam & Gloss Academy</div>
+
+<script>
+  // IMAGE SLIDER
+  const images=[
+    'https://images.unsplash.com/photo-1522336572468-97b06e8ef143',
+    'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e',
+    'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c'
+  ];
+  let i=0;
+  setInterval(()=>{i=(i+1)%images.length;document.getElementById('slide').src=images[i]},3000);
+
+  // COUNTDOWN
+  let end=new Date().getTime()+3*60*60*1000;
+  setInterval(()=>{
+    let now=new Date().getTime();
+    let d=end-now;
+    let h=Math.floor(d/(1000*60*60));
+    let m=Math.floor((d%(1000*60*60))/(1000*60));
+    let s=Math.floor((d%(1000*60))/1000);
+    document.getElementById('timer').innerText=`Offer ends in ${h}:${m}:${s}`;
+  },1000);
+
+  // WHATSAPP
+  function openWhatsApp(){
+    window.open('https://wa.me/919782200063?text=Hello, I want to book a service','_blank');
+  }
+
+  // CLICK TRACKING
+  function track(type){
+    let c=localStorage.getItem(type)||0;
+    localStorage.setItem(type,++c);
+  }
+
+  // QR CODE
+  new QRCode(document.getElementById("qrcode"), window.location.href);
+</script>
+
+</body>
+</html>
