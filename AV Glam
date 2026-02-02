@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AV Glam & Gloss Academy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
+  <style>
+    body{margin:0;font-family:'Poppins',sans-serif;background:linear-gradient(135deg,#ffdde1,#ee9ca7)}
+    .hero{background:#000;color:#fff;text-align:center;padding:30px 15px 60px;border-radius:0 0 40px 40px}
+    .slider img{width:100%;border-radius:25px;margin-top:15px}
+    .badge{display:inline-block;background:#e91e63;padding:6px 14px;border-radius:20px;font-size:13px;margin-top:10px}
+    .container{margin-top:-40px;padding:20px}
+    .card{background:#fff;border-radius:25px;padding:22px;margin-bottom:22px;box-shadow:0 20px 40px rgba(0,0,0,0.15)}
+    .services{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .service{background:#f9f9f9;padding:12px;border-radius:14px;text-align:center;font-weight:600}
+    .offer{background:linear-gradient(135deg,#e91e63,#ff4081);color:#fff;text-align:center;padding:15px;border-radius:18px;font-size:20px;font-weight:700}
+    .countdown{font-size:18px;margin-top:10px}
+    .btn{display:flex;justify-content:center;align-items:center;margin-top:14px;padding:15px;border-radius:40px;text-decoration:none;font-size:17px;font-weight:700;color:#fff}
+    .whatsapp{background:#25D366}
+    .call{background:#111}
+    .reviews{text-align:center;font-size:15px;margin-top:10px}
+    .footer{text-align:center;padding:18px;font-size:13px;color:#444}
+  </style>
+</head>
+
+<body>
+
+<div class="hero">
+  <h1>AV Glam & Gloss Academy</h1>
+  <p>Luxury Beauty • Professional Care</p>
+  <div class="badge">ISO 9001:2015 Certified</div>
+
+  <!-- IMAGE SLIDER -->
+  <div class="slider">
+    <img id="slide" src="https://images.unsplash.com/photo-1522336572468-97b06e8ef143" />
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="card">
+    <h2>💎 Our Services</h2>
+    <div class="services">
+      <div class="service">✨ Facial</div>
+      <div class="service">💦 Hydra Facial</div>
+      <div class="service">💅 Manicure</div>
+      <div class="service">🦶 Pedicure</div>
+      <div class="service">👰 Bridal Makeup</div>
+      <div class="service">🎉 Party Glam</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="offer">🔥 Flat 30% OFF</div>
+    <div class="countdown" id="timer"></div>
+
+    <a class="btn whatsapp" href="#" onclick="track('whatsapp');openWhatsApp()">📲 Book on WhatsApp</a>
+    <a class="btn call" href="tel:91XXXXXXXXXX" onclick="track('call')">📞 Call Now</a>
+
+    <div class="reviews">⭐ 4.9 Rated on Google<br/>500+ Happy Brides</div>
+  </div>
+
+  <div class="card" style="text-align:center">
+    <h3>📱 Scan for Offers</h3>
+    <div id="qrcode"></div>
+  </div>
+
+</div>
+
+<div class="footer">© AV Glam & Gloss Academy</div>
+
+<script>
+  // IMAGE SLIDER
+  const images=[
+    'https://images.unsplash.com/photo-1522336572468-97b06e8ef143',
+    'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e',
+    'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c'
+  ];
+  let i=0;
+  setInterval(()=>{i=(i+1)%images.length;document.getElementById('slide').src=images[i]},3000);
+
+  // COUNTDOWN
+  let end=new Date().getTime()+3*60*60*1000;
+  setInterval(()=>{
+    let now=new Date().getTime();
+    let d=end-now;
+    let h=Math.floor(d/(1000*60*60));
+    let m=Math.floor((d%(1000*60*60))/(1000*60));
+    let s=Math.floor((d%(1000*60))/1000);
+    document.getElementById('timer').innerText=`Offer ends in ${h}:${m}:${s}`;
+  },1000);
+
+  // WHATSAPP
+  function openWhatsApp(){
+    window.open('https://wa.me/91XXXXXXXXXX?text=Hello, I want to book a service','_blank');
+  }
+
+  // CLICK TRACKING
+  function track(type){
+    let c=localStorage.getItem(type)||0;
+    localStorage.setItem(type,++c);
+  }
+
+  // QR CODE
+  new QRCode(document.getElementById("qrcode"), window.location.href);
+</script>
+
+</body>
+</html>
